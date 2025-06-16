@@ -1,9 +1,17 @@
+type Card = {
+	id: null | number
+	imageUrl: string
+	title: string
+	description: string
+}
+
 type Board = {
-	id: number
+	id: null | number
 	imageUrl: string
 	title: string
 	author: string
-	category: string
+	category: string,
+	cards: Card[],
 }
 
 type BoardProps = {
@@ -14,4 +22,8 @@ type BoardsListProps = {
 	boards: Board[]
 }
 
-export { type Board, type BoardsListProps, type BoardProps }
+type CardsListProps = {
+	cards: Card[]
+}
+
+export { type Board, type BoardsListProps, type BoardProps, type CardsListProps }
