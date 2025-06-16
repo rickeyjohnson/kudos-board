@@ -1,12 +1,16 @@
-type Boards = {
+type Board = {
 	id: number
-	imageUrl: string | null
+	imageUrl: string
 	title: string
 	category: string
 }
 
-type BoardsListProps = {
-	boards: Boards[]
+type BoardProps = {
+	board: Board
 }
 
-export { type Boards, type BoardsListProps }
+type BoardsListProps = {
+	boards: Board[]
+}
+
+export { type Board, type BoardsListProps, type BoardProps }

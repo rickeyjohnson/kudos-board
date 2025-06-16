@@ -6,12 +6,12 @@ import {
 	useEffect,
 } from 'react'
 import BoardsList from './BoardLists'
-import type { Boards } from '../types/board'
+import type { Board } from '../types/board'
 
 const Dashboard: FC = () => {
 	const [searchQuery, setSearchQuery] = useState<string>('')
 	const [filterOption, setFilterOption] = useState<string>('')
-	const [boards, setBoards] = useState<Boards[]>([])
+	const [boards, setBoards] = useState<Board[]>([])
 
 	const handleSearch = (event: MouseEvent<HTMLButtonElement>) => {
 		event.preventDefault()
@@ -27,7 +27,7 @@ const Dashboard: FC = () => {
 		setBoards([
 			{
 				id: 1,
-				imageUrl: null,
+				imageUrl: 'https://picsum.photos/200/300',
 				title: 'Congrats Interns',
 				category: 'Celebration',
 			},
