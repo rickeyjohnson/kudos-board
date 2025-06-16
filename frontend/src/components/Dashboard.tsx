@@ -7,18 +7,20 @@ import {
 } from 'react'
 import BoardsList from './BoardLists'
 import type { Board } from '../types/board'
+import CreateBoardModal from './CreateBoardModal'
 
 const Dashboard: FC = () => {
 	const [searchQuery, setSearchQuery] = useState<string>('')
 	const [filterOption, setFilterOption] = useState<string>('')
 	const [boards, setBoards] = useState<Board[]>([])
+    const [openCreateBoardModal, setOpenCreateBoardModal] = useState<boolean>(false)
 
 	const handleSearch = (event: MouseEvent<HTMLButtonElement>) => {
 		event.preventDefault()
 		console.log(searchQuery)
 	}
 
-	const handleClear = (event: React.MouseEvent<HTMLButtonElement>) => {
+	const handleClear = (event: MouseEvent<HTMLButtonElement>) => {
 		event.preventDefault()
 		setSearchQuery('')
 	}
@@ -29,6 +31,7 @@ const Dashboard: FC = () => {
 				id: 1,
 				imageUrl: 'https://picsum.photos/200/300',
 				title: 'Congrats Interns',
+				author: 'Rickey',
 				category: 'Celebration',
 			},
 		])
@@ -80,10 +83,13 @@ const Dashboard: FC = () => {
 					</select>
 				</form>
 
-				<button className="create-board-btn">Create a New Board</button>
+				<button className="create-board-btn" onClick={() => setOpenCreateBoardModal(true)}>Create a New Board</button>
 			</header>
 
-			<BoardsList boards={boards} />
+            <main>
+                <BoardsList boards={boards} />
+                {openCreateBoardModal ? <CreateBoardModal /> : <></>}
+            </main>
 		</div>
 	)
 }

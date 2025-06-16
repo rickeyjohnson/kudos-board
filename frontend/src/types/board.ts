@@ -2,6 +2,7 @@ type Board = {
 	id: number
 	imageUrl: string
 	title: string
+	author: string
 	category: string
 }
 
