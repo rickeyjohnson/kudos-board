@@ -17,22 +17,36 @@ const Home: React.FC = () => {
 
 	const handleSearch = (event: React.MouseEvent<HTMLButtonElement>) => {
 		event.preventDefault()
-		console.log(searchQuery)
+		
+		fetch(`http://localhost:3000/boards/search/${searchQuery}`)
+			.then(res => res.json())
+			.then(data => setBoards(data))
 	}
 
 	const handleClear = (event: React.MouseEvent<HTMLButtonElement>) => {
 		event.preventDefault()
 		setSearchQuery('')
-	}
-
-	const handleSumbit = () => {
-		console.log('submitted!')
-		console.log('re-rendering boards')
 		fetchBoards()
 	}
 
-	const onSelect = () => {
-		console.log('yes')
+	const handleSumbit = () => {
+		fetchBoards()
+	}
+
+	const handleSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
+		const filter = e.target.value
+		
+		if (filter === 'All' || filter === 'Recent') {
+			fetch(`http://localhost:3000/boards/sort/${filter}`)
+				.then(res => res.json())
+				.then(data => setBoards(data))
+		} else {
+			fetch(`http://localhost:3000/boards/filter/${filter}`)
+				.then(res => res.json())
+				.then(data => setBoards(data))
+		}
+
+		setFilterOption(filter)
 	}
 
 	useEffect(() => {
@@ -73,8 +87,8 @@ const Home: React.FC = () => {
 					<select
 						className="filter-dropdown"
 						value={filterOption}
-						onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
-							setFilterOption(e.target.value)
+						onChange={(e) =>
+							handleSelect(e)
 						}
 					>
 						<option value="All">All</option>

@@ -59,12 +59,30 @@ router.get('/search/:query', async (req, res) => {
     res.json(filteredBoards)
 })
 
-// TODO: Error handling
+// TODO: Error/Invalid handling
 router.get('/filter/:category', async (req, res) => {
     const { category } = req.params
     const filteredBoards = await prisma.boards.findMany({
         where: { category: category }
     })
+    res.json(filteredBoards)
+})
+
+// TODO: Error/Invalid handling
+router.get('/sort/:sort', async (req, res) => {
+    const { sort } = req.params
+    let filteredBoards = null;
+
+    if (sort === 'Recent') {
+        filteredBoards = await prisma.boards.findMany({
+            orderBy: {
+                id: 'desc'
+            }
+        })
+    } else {
+        filteredBoards = await prisma.boards.findMany()
+    }
+
     res.json(filteredBoards)
 })
 
