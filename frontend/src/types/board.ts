@@ -10,20 +10,33 @@ type Board = {
 	imageUrl: string
 	title: string
 	author: string
-	category: string,
-	cards: Card[],
+	category: string
+	cards: Card[]
 }
 
 type BoardProps = {
 	board: Board
+	onViewClick: React.MouseEventHandler<HTMLButtonElement>
 }
 
 type BoardsListProps = {
 	boards: Board[]
+	onSelectedBoardClick: React.MouseEventHandler<HTMLButtonElement>
 }
 
 type CardsListProps = {
 	cards: Card[]
 }
 
-export { type Board, type BoardsListProps, type BoardProps, type CardsListProps }
+type HomeProps = {
+	boards: Board[]
+	onSelectedBoardClick: React.MouseEventHandler<HTMLButtonElement>
+}
+
+export {
+	type Board,
+	type BoardsListProps,
+	type BoardProps,
+	type CardsListProps,
+	type HomeProps,
+}

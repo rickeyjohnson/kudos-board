@@ -5,9 +5,11 @@ const CardsList: React.FC<CardsListProps> = ({ cards }) => {
         <div className="cards-list">
             {
                 cards.map(card => {
-                    return <p>card</p>
+                    return <p>{JSON.stringify(card)}</p>
                 })
             }
         </div>
     )
 }
+
+export default CardsList

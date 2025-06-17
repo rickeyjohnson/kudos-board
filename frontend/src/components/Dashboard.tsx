@@ -1,29 +1,18 @@
-import {
-	useState,
-	type FC,
-	type MouseEvent,
-	type ChangeEvent,
-	useEffect,
-} from 'react'
-import BoardsList from './BoardLists'
+import { useState, useEffect } from 'react'
 import type { Board } from '../types/board'
-import CreateBoardModal from './CreateBoardModal'
+import Home from './Home'
+import BoardDetails from './BoardDeatils'
 
-const Dashboard: FC = () => {
-	const [searchQuery, setSearchQuery] = useState<string>('')
-	const [filterOption, setFilterOption] = useState<string>('')
+const Dashboard: React.FC = () => {
 	const [boards, setBoards] = useState<Board[]>([])
-    const [openCreateBoardModal, setOpenCreateBoardModal] = useState<boolean>(false)
+    const [showBoardDetails, setShowBoardDetails] = useState<boolean>(true)
+    const [selectedBoard, setSelectedBoard] = useState<Board>({})
 
-	const handleSearch = (event: MouseEvent<HTMLButtonElement>) => {
-		event.preventDefault()
-		console.log(searchQuery)
-	}
-
-	const handleClear = (event: MouseEvent<HTMLButtonElement>) => {
-		event.preventDefault()
-		setSearchQuery('')
-	}
+    const selectBoard = (board: Board) => {
+        console.log(JSON.stringify(board))
+        setShowBoardDetails(true)
+        setSelectedBoard(board)
+    }
 
 	useEffect(() => {
 		setBoards([
@@ -33,64 +22,24 @@ const Dashboard: FC = () => {
 				title: 'Congrats Interns',
 				author: 'Rickey',
 				category: 'Celebration',
+				cards: [
+					{
+						id: 23,
+						title: 'lebron',
+						imageUrl: 'https://picsum.photos/100/200',
+						description:
+							'lebron james lebron james lebron james lebron james',
+					},
+				],
 			},
 		])
 	}, [])
 
 	return (
-		<div className="Home">
-			<header>
-				<form className="search-form">
-					<input
-						className="search-bar"
-						type="text"
-						placeholder="Search boards"
-						name="search-bar"
-						value={searchQuery}
-						onChange={(e: ChangeEvent<HTMLInputElement>) =>
-							setSearchQuery(e.target.value)
-						}
-					/>
-
-					<button
-						className="search-btn"
-						type="submit"
-						onClick={handleSearch}
-					>
-						Search
-					</button>
-
-					<button
-						className="clear-btn"
-						type="reset"
-						onClick={handleClear}
-					>
-						Clear
-					</button>
-
-					<select
-						className="filter-dropdown"
-						value={filterOption}
-						onChange={(e: ChangeEvent<HTMLSelectElement>) =>
-							setFilterOption(e.target.value)
-						}
-					>
-						<option value="All">All</option>
-						<option value="Recent">Recent</option>
-						<option value="Celebration">Celebration</option>
-						<option value="Thank You">Thank You</option>
-						<option value="Inspiration">Inspiration</option>
-					</select>
-				</form>
-
-				<button className="create-board-btn" onClick={() => setOpenCreateBoardModal(true)}>Create a New Board</button>
-			</header>
-
-            <main>
-                <BoardsList boards={boards} />
-                {openCreateBoardModal ? <CreateBoardModal /> : <></>}
-            </main>
-		</div>
+		<>
+			<Home boards={boards} onSelectedBoardClick={() => selectBoard}/>
+            <BoardDetails board={selectedBoard} />
+		</>
 	)
 }
 

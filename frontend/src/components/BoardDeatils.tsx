@@ -1,10 +1,13 @@
-import type { Board } from "../types/board";
+import type { BoardProps } from '../types/board'
+import CardsList from './CardsList'
 
-const BoardDetails: React.FC<Board> = ({ board }) => {
-    return (
-        <div className="board-details">
-            board details here
-            <CardsList />
-        </div>
-    )
+const BoardDetails: React.FC<BoardProps> = ({ board }) => {
+	return (
+		<div className="board-details">
+			board details here
+			<CardsList cards={board.cards} />
+		</div>
+	)
 }
+
+export default BoardDetails
