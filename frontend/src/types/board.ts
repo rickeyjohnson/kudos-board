@@ -16,12 +16,12 @@ type Board = {
 
 type BoardProps = {
 	board: Board
-	onViewClick: React.MouseEventHandler<HTMLButtonElement>
+	onSelect: (board: Board) => void
 }
 
 type BoardsListProps = {
 	boards: Board[]
-	onSelectedBoardClick: React.MouseEventHandler<HTMLButtonElement>
+	onSelect: (board: Board) => void
 }
 
 type CardsListProps = {
@@ -30,11 +30,12 @@ type CardsListProps = {
 
 type HomeProps = {
 	boards: Board[]
-	onSelectedBoardClick: React.MouseEventHandler<HTMLButtonElement>
+	onSelect: (board: Board) => void
 }
 
 type BoardDetailsProps = {
 	board?: Board
+	onExit: () => void
 }
 
 export {

@@ -3,7 +3,7 @@ import BoardsList from "./BoardLists"
 import CreateBoardModal from "./CreateBoardModal"
 import type { HomeProps } from "../types/board"
 
-const Home: React.FC<HomeProps> = ({ boards, onSelectedBoardClick }) => {
+const Home: React.FC<HomeProps> = ({ boards, onSelect }) => {
     const [searchQuery, setSearchQuery] = useState<string>('')
 	const [filterOption, setFilterOption] = useState<string>('')
     const [openCreateBoardModal, setOpenCreateBoardModal] = useState<boolean>(false)
@@ -68,7 +68,7 @@ const Home: React.FC<HomeProps> = ({ boards, onSelectedBoardClick }) => {
 			</header>
 
             <main>
-                <BoardsList boards={boards} onSelectedBoardClick={onSelectedBoardClick}/>
+                <BoardsList boards={boards} onSelect={onSelect}/>
                 {openCreateBoardModal ? <CreateBoardModal /> : <></>}
             </main>
 		</div>

@@ -1,7 +1,7 @@
 import type { FC } from 'react'
 import type { BoardProps } from '../types/board'
 
-const Board: FC<BoardProps> = ({ board, onViewClick }) => {
+const Board: FC<BoardProps> = ({ board, onSelect }) => {
 	return (
 		<div className="board">
 			<img src={board.imageUrl} alt="board image" />
@@ -9,7 +9,7 @@ const Board: FC<BoardProps> = ({ board, onViewClick }) => {
 			<h4>{board.author}</h4>
 			<p>{board.category}</p>
 
-			<button className="view-board-btn" onClick={onViewClick}>View Board</button>
+			<button className="view-board-btn" onClick={() => onSelect(board)}>View Board</button>
 			<button className="delete-board-btn">Delete Board</button>
 		</div>
 	)
