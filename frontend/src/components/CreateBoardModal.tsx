@@ -1,24 +1,28 @@
 import { useState, type ChangeEvent, type FC } from 'react'
-import type { Board, CreateBoardModalProps } from '../types/board'
+import type { CreateBoardModalProps } from '../types/board'
 
-const CreateBoardModal: FC<CreateBoardModalProps> = ({onSubmitNewBoard}) => {
-	const [title, setTitle] = useState<string>('')
-	const [author, setAuthor] = useState<string>('')
-	const [description, setDescription] = useState<string>('')
-	const [categoryOption, setCategoryOption] = useState<string>('Celebration')
+const CreateBoardModal: FC<CreateBoardModalProps> = ({ onSubmit }) => {
+	const [title, setTitle] = useState<string>()
+	const [author, setAuthor] = useState<string>()
+	const [description, setDescription] = useState<string>()
+	const [category, setCategory] = useState<string>('Celebration')
 
-    const createNewBoard = (e: React.MouseEvent<HTMLButtonElement>) => {
-        e.preventDefault()
-        return {
-            title: title,
-            author: author,
-            description: description,
-            category: categoryOption,
-			imageUrl: null,
-			id: 0,
-			cards: [],
-        }
-    }
+	const createNewBoard = (e: React.MouseEvent<HTMLButtonElement>) => {
+		e.preventDefault()
+
+		fetch('http://localhost:3000/boards', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({
+				title: title,
+				author: author,
+				category: category,
+				image_url: 'https://s3.eu-central-2.wasabisys.com/bub/wp-media-folder-british-university-of-bahrain-uk-bachelor-degree-courses/wp-content/uploads/2018/02/image-placeholder.jpg',
+			})
+		})
+	}
 
 	return (
 		<div className="create-board-modal-overlay modal-overlay">
@@ -42,10 +46,10 @@ const CreateBoardModal: FC<CreateBoardModalProps> = ({onSubmitNewBoard}) => {
 					onChange={(e: ChangeEvent<HTMLInputElement>) =>
 						setAuthor(e.target.value)
 					}
-					required={false}
+					required={true}
 				/>
 
-				<label htmlFor="description">Description</label>
+				{/* <label htmlFor="description">Description</label>
 				<input
 					type="text"
 					name="description"
@@ -54,15 +58,15 @@ const CreateBoardModal: FC<CreateBoardModalProps> = ({onSubmitNewBoard}) => {
 						setDescription(e.target.value)
 					}
 					required={true}
-				/>
+				/> */}
 
 				<label htmlFor="category">Category</label>
 				<select
 					className="filter-dropdown"
 					name="category"
-					value={categoryOption}
+					value={category}
 					onChange={(e: ChangeEvent<HTMLSelectElement>) =>
-						setCategoryOption(e.target.value)
+						setCategory(e.target.value)
 					}
 				>
 					<option value="Celebration">Celebration</option>
@@ -70,12 +74,15 @@ const CreateBoardModal: FC<CreateBoardModalProps> = ({onSubmitNewBoard}) => {
 					<option value="Inspiration">Inspiration</option>
 				</select>
 
-                <button type="submit" onClick={(e) => 
-					{	
-						const newBoard: Board = createNewBoard(e)
-						onSubmitNewBoard(newBoard)
+				<button
+					type="submit"
+					onClick={(e) => {
+						createNewBoard(e)
+						onSubmit()
 					}}
-				>Create</button>
+				>
+					Create
+				</button>
 			</form>
 		</div>
 	)

@@ -1,12 +1,19 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import BoardsList from "./BoardLists"
 import CreateBoardModal from "./CreateBoardModal"
-import type { HomeProps } from "../types/board"
+import type { BoardType } from "../types/board"
 
-const Home: React.FC<HomeProps> = ({ boards, onSelect, onSubmitNewBoard }) => {
+const Home: React.FC = () => {
+	const [boards, setBoards] = useState<BoardType[]>([])
     const [searchQuery, setSearchQuery] = useState<string>('')
 	const [filterOption, setFilterOption] = useState<string>('')
     const [openCreateBoardModal, setOpenCreateBoardModal] = useState<boolean>(false)
+
+	const fetchBoards = () => {
+		fetch('http://localhost:3000/boards')
+			.then(res => res.json())
+			.then(data => setBoards(data))
+	}
 
 	const handleSearch = (event: React.MouseEvent<HTMLButtonElement>) => {
 		event.preventDefault()
@@ -17,6 +24,20 @@ const Home: React.FC<HomeProps> = ({ boards, onSelect, onSubmitNewBoard }) => {
 		event.preventDefault()
 		setSearchQuery('')
 	}
+
+	const handleSumbit = () => {
+		console.log('submitted!')
+		console.log('re-rendering boards')
+		fetchBoards()
+	}
+
+	const onSelect = () => {
+		console.log('yes')
+	}
+
+	useEffect(() => {
+		fetchBoards()
+	}, [])
 
     return (
         <div className="Home">
@@ -67,10 +88,10 @@ const Home: React.FC<HomeProps> = ({ boards, onSelect, onSubmitNewBoard }) => {
 				<button className="create-board-btn" onClick={() => setOpenCreateBoardModal(true)}>Create a New Board</button>
 			</header>
 
-            <main>
-                <BoardsList boards={boards} onSelect={onSelect}/>
-                {openCreateBoardModal ? <CreateBoardModal onSubmitNewBoard={onSubmitNewBoard}/> : <></>}
-            </main>
+            <BoardsList boards={boards} />
+
+			{openCreateBoardModal ? <CreateBoardModal onSubmit={handleSumbit}/> : <></>}
+
 		</div>
     )
 }

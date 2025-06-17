@@ -1,55 +1,51 @@
-type Card = {
+type CardType = {
 	id: null | number
-	imageUrl: null | string
+	image_url: null | string
 	title: string
 	description: string
 }
 
-type Board = {
-	id: null | number
-	imageUrl: null | string
+type BoardType = {
+	id: number
+	image_url: null | string
 	title: string
 	author: string
 	category: string
-	cards: Card[]
 }
 
 type BoardProps = {
-	board: Board
-	onSelect: (board: Board) => void
+	board: BoardType
 }
 
 type BoardsListProps = {
-	boards: Board[]
-	onSelect: (board: Board) => void
+	boards: BoardType[]
 }
 
 type CardsListProps = {
-	cards: Card[]
+	cards: CardType[]
 }
 
 type HomeProps = {
-	boards: Board[]
-	onSelect: (board: Board) => void
-	onSubmitNewBoard: (newBoard: Board) => void
+	boards: BoardType[]
+	onSubmitNewBoard: (newBoard: BoardType) => void
 }
 
 type BoardDetailsProps = {
-	board?: Board
+	board?: BoardType
 	onExit: () => void
 }
 
 type CreateBoardModalProps = {
-	onSubmitNewBoard: (newBoard: Board) => void
+	onSubmit: () => void
 }
 
 export {
-	type Board,
+	type BoardType,
 	type BoardsListProps,
 	type BoardProps,
 	type CardsListProps,
 	type HomeProps,
 	type BoardDetailsProps,
-	type Card,
+	type CardType,
 	type CreateBoardModalProps
 }
