@@ -44,5 +44,6 @@ export {
 	type BoardProps,
 	type CardsListProps,
 	type HomeProps,
-	type BoardDetailsProps
+	type BoardDetailsProps,
+	type Card
 }
