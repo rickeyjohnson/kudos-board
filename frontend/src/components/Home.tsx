@@ -49,6 +49,11 @@ const Home: React.FC = () => {
 		setFilterOption(filter)
 	}
 
+	const handleDeleteBoard = () => {
+		console.log('board deleted')
+		fetchBoards()
+	}
+
 	useEffect(() => {
 		fetchBoards()
 	}, [])
@@ -102,7 +107,7 @@ const Home: React.FC = () => {
 				<button className="create-board-btn" onClick={() => setOpenCreateBoardModal(true)}>Create a New Board</button>
 			</header>
 
-            <BoardsList boards={boards} />
+            <BoardsList boards={boards} deleteBoard={handleDeleteBoard}/>
 
 			{openCreateBoardModal ? <CreateBoardModal onSubmit={handleSumbit}/> : <></>}
 

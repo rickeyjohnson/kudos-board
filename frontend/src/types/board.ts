@@ -15,10 +15,12 @@ type BoardType = {
 
 type BoardProps = {
 	board: BoardType
+	deleteBoard: () => void
 }
 
 type BoardsListProps = {
 	boards: BoardType[]
+	deleteBoard: () => void
 }
 
 type CardsListProps = {
