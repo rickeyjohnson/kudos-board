@@ -33,10 +33,15 @@ type HomeProps = {
 	onSelectedBoardClick: React.MouseEventHandler<HTMLButtonElement>
 }
 
+type BoardDetailsProps = {
+	board?: Board
+}
+
 export {
 	type Board,
 	type BoardsListProps,
 	type BoardProps,
 	type CardsListProps,
 	type HomeProps,
+	type BoardDetailsProps
 }

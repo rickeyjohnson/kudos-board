@@ -5,14 +5,14 @@ import BoardDetails from './BoardDeatils'
 
 const Dashboard: React.FC = () => {
 	const [boards, setBoards] = useState<Board[]>([])
-    const [showBoardDetails, setShowBoardDetails] = useState<boolean>(true)
-    const [selectedBoard, setSelectedBoard] = useState<Board>({})
+	const [showBoardDetails, setShowBoardDetails] = useState<boolean>(true)
+	const [selectedBoard, setSelectedBoard] = useState<Board | undefined>(undefined)
 
-    const selectBoard = (board: Board) => {
-        console.log(JSON.stringify(board))
-        setShowBoardDetails(true)
-        setSelectedBoard(board)
-    }
+	const selectBoard = (board: Board) => {
+		console.log(JSON.stringify(board))
+		setShowBoardDetails(true)
+		setSelectedBoard(board)
+	}
 
 	useEffect(() => {
 		setBoards([
@@ -37,8 +37,14 @@ const Dashboard: React.FC = () => {
 
 	return (
 		<>
-			<Home boards={boards} onSelectedBoardClick={() => selectBoard}/>
-            <BoardDetails board={selectedBoard} />
+			{selectBoard ? (
+				<Home
+					boards={boards}
+					onSelectedBoardClick={() => selectBoard}
+				/>
+			) : (
+				<BoardDetails board={selectedBoard} />
+			)}
 		</>
 	)
 }
