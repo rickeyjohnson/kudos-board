@@ -4,7 +4,7 @@ import type { BoardProps } from '../types/board'
 const Board: FC<BoardProps> = ({ board, onSelect }) => {
 	return (
 		<div className="board">
-			<img src={board.imageUrl} alt="board image" />
+			<img src={board.imageUrl ?? 'https://picsum.photos/200/300'} alt="board image" />
 			<h3>{board.title}</h3>
 			<h4>{board.author}</h4>
 			<p>{board.category}</p>

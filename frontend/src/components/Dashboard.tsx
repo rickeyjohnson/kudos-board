@@ -14,6 +14,11 @@ const Dashboard: React.FC = () => {
         console.log('entered', JSON.stringify(board))
 	}
 
+    const handleSubmitNewBoard = (newBoard: Board) => {
+        setBoards([...boards, {...newBoard, id: boards.length + 1}])
+        console.log('new board created')
+    }
+
     const handleExit = () => {
         setShowBoardDetails(false)
         console.log('exited')
@@ -46,6 +51,7 @@ const Dashboard: React.FC = () => {
 				<Home
 					boards={boards}
 					onSelect={handleSelect}
+                    onSubmitNewBoard={handleSubmitNewBoard}
 				/>
 			) : (
 				<BoardDetails board={selectedBoard} onExit={handleExit}/>

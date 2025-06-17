@@ -1,19 +1,23 @@
 import { useState, type ChangeEvent, type FC } from 'react'
+import type { Board, CreateBoardModalProps } from '../types/board'
 
-const CreateBoardModal: FC = () => {
+const CreateBoardModal: FC<CreateBoardModalProps> = ({onSubmitNewBoard}) => {
 	const [title, setTitle] = useState<string>('')
 	const [author, setAuthor] = useState<string>('')
 	const [description, setDescription] = useState<string>('')
 	const [categoryOption, setCategoryOption] = useState<string>('Celebration')
 
-    const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const createNewBoard = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault()
-        console.log({
-            title,
-            author,
-            description,
-            categoryOption
-        })
+        return {
+            title: title,
+            author: author,
+            description: description,
+            category: categoryOption,
+			imageUrl: null,
+			id: 0,
+			cards: [],
+        }
     }
 
 	return (
@@ -66,7 +70,12 @@ const CreateBoardModal: FC = () => {
 					<option value="Inspiration">Inspiration</option>
 				</select>
 
-                <button type="submit" onClick={handleSubmit}>Create</button>
+                <button type="submit" onClick={(e) => 
+					{	
+						const newBoard: Board = createNewBoard(e)
+						onSubmitNewBoard(newBoard)
+					}}
+				>Create</button>
 			</form>
 		</div>
 	)

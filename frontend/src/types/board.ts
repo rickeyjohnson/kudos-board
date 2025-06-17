@@ -1,13 +1,13 @@
 type Card = {
 	id: null | number
-	imageUrl: string
+	imageUrl: null | string
 	title: string
 	description: string
 }
 
 type Board = {
 	id: null | number
-	imageUrl: string
+	imageUrl: null | string
 	title: string
 	author: string
 	category: string
@@ -31,11 +31,16 @@ type CardsListProps = {
 type HomeProps = {
 	boards: Board[]
 	onSelect: (board: Board) => void
+	onSubmitNewBoard: (newBoard: Board) => void
 }
 
 type BoardDetailsProps = {
 	board?: Board
 	onExit: () => void
+}
+
+type CreateBoardModalProps = {
+	onSubmitNewBoard: (newBoard: Board) => void
 }
 
 export {
@@ -45,5 +50,6 @@ export {
 	type CardsListProps,
 	type HomeProps,
 	type BoardDetailsProps,
-	type Card
+	type Card,
+	type CreateBoardModalProps
 }
