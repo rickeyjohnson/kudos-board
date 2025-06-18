@@ -6,23 +6,25 @@ import BoardDetails from './BoardDeatils'
 const Dashboard: React.FC = () => {
 	const [boards, setBoards] = useState<Board[]>([])
 	const [showBoardDetails, setShowBoardDetails] = useState<boolean>(false)
-	const [selectedBoard, setSelectedBoard] = useState<Board | undefined>(undefined)
+	const [selectedBoard, setSelectedBoard] = useState<Board | undefined>(
+		undefined
+	)
 
 	const handleSelect = (board: Board) => {
 		setShowBoardDetails(true)
 		setSelectedBoard(board)
-        console.log('entered', JSON.stringify(board))
+		console.log('entered', JSON.stringify(board))
 	}
 
-    const handleSubmitNewBoard = (newBoard: Board) => {
-        setBoards([...boards, {...newBoard, id: boards.length + 1}])
-        console.log('new board created')
-    }
+	const handleSubmitNewBoard = (newBoard: Board) => {
+		setBoards([...boards, { ...newBoard, id: boards.length + 1 }])
+		console.log('new board created')
+	}
 
-    const handleExit = () => {
-        setShowBoardDetails(false)
-        console.log('exited')
-    }
+	const handleExit = () => {
+		setShowBoardDetails(false)
+		console.log('exited')
+	}
 
 	useEffect(() => {
 		setBoards([
@@ -51,10 +53,10 @@ const Dashboard: React.FC = () => {
 				<Home
 					boards={boards}
 					onSelect={handleSelect}
-                    onSubmitNewBoard={handleSubmitNewBoard}
+					onSubmitNewBoard={handleSubmitNewBoard}
 				/>
 			) : (
-				<BoardDetails board={selectedBoard} onExit={handleExit}/>
+				<BoardDetails board={selectedBoard} onExit={handleExit} />
 			)}
 		</>
 	)

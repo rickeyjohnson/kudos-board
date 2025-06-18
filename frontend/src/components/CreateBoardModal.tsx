@@ -13,14 +13,15 @@ const CreateBoardModal: FC<CreateBoardModalProps> = ({ onSubmit }) => {
 		fetch('http://localhost:3000/boards', {
 			method: 'POST',
 			headers: {
-				'Content-Type': 'application/json'
+				'Content-Type': 'application/json',
 			},
 			body: JSON.stringify({
 				title: title,
 				author: author,
 				category: category,
-				image_url: 'https://s3.eu-central-2.wasabisys.com/bub/wp-media-folder-british-university-of-bahrain-uk-bachelor-degree-courses/wp-content/uploads/2018/02/image-placeholder.jpg',
-			})
+				image_url:
+					'https://s3.eu-central-2.wasabisys.com/bub/wp-media-folder-british-university-of-bahrain-uk-bachelor-degree-courses/wp-content/uploads/2018/02/image-placeholder.jpg',
+			}),
 		})
 	}
 

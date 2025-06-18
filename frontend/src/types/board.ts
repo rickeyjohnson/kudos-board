@@ -42,6 +42,11 @@ type CreateBoardModalProps = {
 	onSubmit: () => void
 }
 
+type CreateCardModalProps = {
+	board_id: string | number
+	onSubmit: () => void
+}
+
 export {
 	type BoardType,
 	type BoardsListProps,
@@ -50,5 +55,6 @@ export {
 	type HomeProps,
 	type BoardDetailsProps,
 	type CardType,
-	type CreateBoardModalProps
+	type CreateBoardModalProps,
+	type CreateCardModalProps
 }

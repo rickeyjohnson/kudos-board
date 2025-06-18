@@ -17,7 +17,7 @@ const Card = ({ card }: CardProps) => {
 			/>
 			<h2>{card.title}</h2>
 			<p>{card.author}</p>
-            <p>upvotes: {card.upvotes}</p>
+			<p>upvotes: {card.upvotes}</p>
 		</div>
 	)
 }

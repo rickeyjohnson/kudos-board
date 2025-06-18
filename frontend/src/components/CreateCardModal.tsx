@@ -1,11 +1,27 @@
 import { useState, type FC } from 'react'
-import type { CreateBoardModalProps } from '../types/board'
+import type { CreateCardModalProps } from '../types/board'
 
-const CreateCardModal: FC<CreateBoardModalProps> = ({ onSubmit }) => {
-	const [title, setTitle] = useState<string | null>(null)
-	const [author, setAuthor] = useState<string | null>()
-	const [description, setDescription] = useState<string | null>()
-	const [categoryOption, setCategoryOption] = useState<string>('Celebration')
+const CreateCardModal: FC<CreateCardModalProps> = ({ board_id, onSubmit }) => {
+	const [title, setTitle] = useState<string>()
+	const [author, setAuthor] = useState<string>()
+
+	const postCard = (e: any) => {
+		e.preventDefault()
+
+		fetch(`http://localhost:3000/boards/${board_id}/cards`, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+				title: title,
+				image_url:
+					'https://s3.eu-central-2.wasabisys.com/bub/wp-media-folder-british-university-of-bahrain-uk-bachelor-degree-courses/wp-content/uploads/2018/02/image-placeholder.jpg',
+				author: author,
+				upvotes: 0,
+			}),
+		})
+	}
 
 	return (
 		<div className="create-card-modal-overlay modal-overlay">
@@ -21,18 +37,24 @@ const CreateCardModal: FC<CreateBoardModalProps> = ({ onSubmit }) => {
 					required={true}
 				/>
 
-				<label htmlFor="description">Description</label>
+				<label htmlFor="author">Author</label>
 				<input
 					type="text"
-					name="description"
-					value={description ?? ''}
+					name="author"
+					value={author ?? ''}
 					onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-						setDescription(e.target.value)
+						setAuthor(e.target.value)
 					}
 					required={true}
 				/>
 
-				<button type="submit" onClick={onSubmit}>
+				<button
+					type="submit"
+					onClick={(e) => {
+						postCard(e)
+						onSubmit()
+					}}
+				>
 					Create
 				</button>
 			</form>

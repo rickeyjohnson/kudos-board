@@ -1,9 +1,5 @@
 import { useEffect, useState } from 'react'
-import {
-	type CardType,
-	type BoardDetailsProps,
-	type BoardType,
-} from '../types/board'
+import { type CardType, type BoardType } from '../types/board'
 import CardsList from './CardsList'
 import CreateCardModal from './CreateCardModal'
 import { Link, useParams } from 'react-router'
@@ -26,6 +22,12 @@ const BoardDetails: React.FC = () => {
 			.then((data) => setCards(data))
 	}
 
+	const handleSubmit = () => {
+		fetchBoard()
+		fetchCards()
+		setOpenCreateCardModal(false)
+	}
+
 	useEffect(() => {
 		fetchBoard()
 		fetchCards()
@@ -39,12 +41,17 @@ const BoardDetails: React.FC = () => {
 
 			<h1>{board?.title}</h1>
 
-			<CardsList cards={cards} />
-
 			<button onClick={() => setOpenCreateCardModal(true)}>
 				Create new card
 			</button>
-			{/* {openCreateCardModal ? <CreateCardModal /> : <></>} */}
+
+			<CardsList cards={cards} />
+
+			{openCreateCardModal ? (
+				<CreateCardModal onSubmit={handleSubmit} board_id={id ?? ''} />
+			) : (
+				<></>
+			)}
 		</div>
 	)
 }

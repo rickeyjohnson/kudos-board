@@ -6,7 +6,13 @@ const BoardsList: FC<BoardsListProps> = ({ boards, deleteBoard }) => {
 	return (
 		<div className="boards-list">
 			{boards.map((board) => {
-				return <Board key={board.id} board={board} deleteBoard={deleteBoard}/>
+				return (
+					<Board
+						key={board.id}
+						board={board}
+						deleteBoard={deleteBoard}
+					/>
+				)
 			})}
 		</div>
 	)

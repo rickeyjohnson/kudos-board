@@ -95,19 +95,6 @@ router.get('/:id/cards', async (req, res) => {
 	res.json(cards)
 })
 
-// router.get('/:id/cards/:id', async (req, res) => {
-//     const { id } = req.params
-
-//     try {
-//         const board = await prisma.boards.findUnique({
-//             where: { id: parseInt(id) }
-//         })
-//         res.json(board)
-//     } catch(error) {
-//         res.status(404).send('ID is not valid')
-//     }
-// })
-
 router.post('/:id/cards', async (req, res) => {
 	const { id } = req.params
 	const { title, image_url, author, upvotes } = req.body
@@ -117,7 +104,7 @@ router.post('/:id/cards', async (req, res) => {
 			title: title,
 			image_url: image_url,
 			author: author,
-			upvotes: upvotes,
+			upvotes: 0,
 		},
 	})
 
