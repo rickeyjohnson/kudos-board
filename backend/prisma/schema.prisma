@@ -29,4 +29,5 @@ model Cards {
   author        String
   image_url     String
   upvotes       Int
+  message       String
 }

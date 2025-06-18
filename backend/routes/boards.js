@@ -77,6 +77,7 @@ router.get('/sort/:sort', async (req, res) => {
 			orderBy: {
 				id: 'desc',
 			},
+            take: 6,
 		})
 	} else {
 		filteredBoards = await prisma.boards.findMany()
@@ -84,6 +85,8 @@ router.get('/sort/:sort', async (req, res) => {
 
 	res.json(filteredBoards)
 })
+
+
 
 // Cards
 
@@ -97,7 +100,7 @@ router.get('/:id/cards', async (req, res) => {
 
 router.post('/:id/cards', async (req, res) => {
 	const { id } = req.params
-	const { title, image_url, author, upvotes } = req.body
+	const { title, image_url, author, message } = req.body
 	const newCard = await prisma.cards.create({
 		data: {
 			board_id: parseInt(id),
@@ -105,6 +108,7 @@ router.post('/:id/cards', async (req, res) => {
 			image_url: image_url,
 			author: author,
 			upvotes: 0,
+            message: message
 		},
 	})
 

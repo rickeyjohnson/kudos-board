@@ -13,7 +13,6 @@ const Board: FC<BoardProps> = ({ board, deleteBoard }) => {
 				'Content-Type': 'application/json',
 			},
 		})
-		deleteBoard()
 	}
 
 	return (
@@ -29,7 +28,10 @@ const Board: FC<BoardProps> = ({ board, deleteBoard }) => {
 
 			<button
 				className="delete-board-btn"
-				onClick={() => handleDeleteBoard()}
+				onClick={() => {
+					handleDeleteBoard()
+					deleteBoard()
+				}}
 			>
 				Delete Board
 			</button>

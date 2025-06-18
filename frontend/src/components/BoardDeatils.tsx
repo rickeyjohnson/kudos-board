@@ -31,7 +31,7 @@ const BoardDetails: React.FC = () => {
 	useEffect(() => {
 		fetchBoard()
 		fetchCards()
-	}, [])
+	}, [cards])
 
 	return (
 		<main className="board-details">

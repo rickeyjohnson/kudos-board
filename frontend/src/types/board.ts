@@ -4,6 +4,7 @@ type CardType = {
 	title: string
 	author: string
 	upvotes: number
+	message: string
 }
 
 type BoardType = {

@@ -2,11 +2,13 @@ import { useState, type FC } from 'react'
 import type { CreateCardModalProps } from '../types/board'
 
 const CreateCardModal: FC<CreateCardModalProps> = ({ board_id, onSubmit }) => {
-	const [title, setTitle] = useState<string>()
-	const [author, setAuthor] = useState<string>()
+	const [title, setTitle] = useState<string>('')
+	const [author, setAuthor] = useState<string>('')
+	const [message, setMessage] = useState<string>('')
 
 	const postCard = (e: any) => {
-		e.preventDefault()
+
+		if (!title || !message) { return false }
 
 		fetch(`http://localhost:3000/boards/${board_id}/cards`, {
 			method: 'POST',
@@ -18,9 +20,13 @@ const CreateCardModal: FC<CreateCardModalProps> = ({ board_id, onSubmit }) => {
 				image_url:
 					'https://s3.eu-central-2.wasabisys.com/bub/wp-media-folder-british-university-of-bahrain-uk-bachelor-degree-courses/wp-content/uploads/2018/02/image-placeholder.jpg',
 				author: author,
-				upvotes: 0,
+				message: message,
 			}),
 		})
+
+		e.preventDefault()
+
+		return true
 	}
 
 	return (
@@ -48,13 +54,20 @@ const CreateCardModal: FC<CreateCardModalProps> = ({ board_id, onSubmit }) => {
 					required={true}
 				/>
 
-				<button
-					type="submit"
-					onClick={(e) => {
-						postCard(e)
-						onSubmit()
-					}}
-				>
+				<label htmlFor="message">Message</label>
+				<input
+					type="text"
+					name="message"
+					value={message}
+					onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+						setMessage(e.target.value)
+					}
+					required={true}
+				/>
+
+				<button type='submit' onClick={(e: any) => {
+					if (postCard(e)) { onSubmit() }
+				}}>
 					Create
 				</button>
 			</form>

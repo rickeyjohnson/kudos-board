@@ -19,9 +19,13 @@ const Home: React.FC = () => {
 	const handleSearch = (event: React.MouseEvent<HTMLButtonElement>) => {
 		event.preventDefault()
 
-		fetch(`http://localhost:3000/boards/search/${searchQuery}`)
-			.then((res) => res.json())
-			.then((data) => setBoards(data))
+		if (!searchQuery) { 
+			fetchBoards() 
+		} else {
+			fetch(`http://localhost:3000/boards/search/${searchQuery}`)
+				.then((res) => res.json())
+				.then((data) => setBoards(data))
+		}
 	}
 
 	const handleClear = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -32,6 +36,7 @@ const Home: React.FC = () => {
 
 	const handleSumbit = () => {
 		fetchBoards()
+		setOpenCreateBoardModal(false)
 	}
 
 	const handleSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -52,12 +57,11 @@ const Home: React.FC = () => {
 
 	const handleDeleteBoard = () => {
 		console.log('board deleted')
-		fetchBoards()
 	}
 
 	useEffect(() => {
 		fetchBoards()
-	}, [])
+	}, [boards])
 
 	return (
 		<main className="Home">
