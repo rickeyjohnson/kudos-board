@@ -5,11 +5,12 @@ const CreateBoardModal: FC<CreateBoardModalProps> = ({ onSubmit }) => {
 	const [title, setTitle] = useState<string>('')
 	const [author, setAuthor] = useState<string>('')
 	const [category, setCategory] = useState<string>('Celebration')
+	const api_url = import.meta.env.VITE_API_URL
 
 	const createNewBoard = (e: React.MouseEvent<HTMLButtonElement>) => {
 		if (!title) { return false }
 
-		fetch('http://localhost:3000/boards', {
+		fetch(`${api_url}/boards`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',

@@ -5,9 +5,10 @@ import { Link } from 'react-router'
 const Board: FC<BoardProps> = ({ board, deleteBoard }) => {
 	const IMG_PLACEHOLDER =
 		'https://s3.eu-central-2.wasabisys.com/bub/wp-media-folder-british-university-of-bahrain-uk-bachelor-degree-courses/wp-content/uploads/2018/02/image-placeholder.jpg'
+	const api_url = import.meta.env.VITE_API_URL
 
 	const handleDeleteBoard = () => {
-		fetch(`http://localhost:3000/boards/${board.id}`, {
+		fetch(`${api_url}/boards/${board.id}`, {
 			method: 'DELETE',
 			headers: {
 				'Content-Type': 'application/json',

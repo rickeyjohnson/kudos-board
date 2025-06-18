@@ -9,15 +9,16 @@ const BoardDetails: React.FC = () => {
 	const [board, setBoard] = useState<BoardType>()
 	const [cards, setCards] = useState<CardType[]>([])
 	const [openCreateCardModal, setOpenCreateCardModal] = useState(false)
+	const api_url = import.meta.env.VITE_API_URL
 
 	const fetchBoard = () => {
-		fetch(`http://localhost:3000/boards/${id}`)
+		fetch(`${api_url}/boards/${id}`)
 			.then((res) => res.json())
 			.then((data) => setBoard(data))
 	}
 
 	const fetchCards = () => {
-		fetch(`http://localhost:3000/boards/${id}/cards`)
+		fetch(`${api_url}/boards/${id}/cards`)
 			.then((res) => res.json())
 			.then((data) => setCards(data))
 	}
@@ -26,10 +27,6 @@ const BoardDetails: React.FC = () => {
 		fetchBoard()
 		fetchCards()
 		setOpenCreateCardModal(false)
-	}
-
-	const handleDeleteBoard = () => {
-		
 	}
 
 	useEffect(() => {

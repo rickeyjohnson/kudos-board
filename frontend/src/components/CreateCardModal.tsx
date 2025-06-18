@@ -5,12 +5,13 @@ const CreateCardModal: FC<CreateCardModalProps> = ({ board_id, onSubmit }) => {
 	const [title, setTitle] = useState<string>('')
 	const [author, setAuthor] = useState<string>('')
 	const [message, setMessage] = useState<string>('')
+	const api_url = import.meta.env.VITE_API_URL
 
 	const postCard = (e: any) => {
 
 		if (!title || !message) { return false }
 
-		fetch(`http://localhost:3000/boards/${board_id}/cards`, {
+		fetch(`${api_url}/boards/${board_id}/cards`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',

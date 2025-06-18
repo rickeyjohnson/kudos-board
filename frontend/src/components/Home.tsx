@@ -9,9 +9,10 @@ const Home: React.FC = () => {
 	const [filterOption, setFilterOption] = useState<string>('')
 	const [openCreateBoardModal, setOpenCreateBoardModal] =
 		useState<boolean>(false)
+	const api_url = import.meta.env.VITE_API_URL
 
 	const fetchBoards = () => {
-		fetch('http://localhost:3000/boards')
+		fetch(`${api_url}/boards`)
 			.then((res) => res.json())
 			.then((data) => setBoards(data))
 	}
@@ -22,7 +23,7 @@ const Home: React.FC = () => {
 		if (!searchQuery) { 
 			fetchBoards() 
 		} else {
-			fetch(`http://localhost:3000/boards/search/${searchQuery}`)
+			fetch(`${api_url}/boards/search/${searchQuery}`)
 				.then((res) => res.json())
 				.then((data) => setBoards(data))
 		}
@@ -43,11 +44,11 @@ const Home: React.FC = () => {
 		const filter = e.target.value
 
 		if (filter === 'All' || filter === 'Recent') {
-			fetch(`http://localhost:3000/boards/sort/${filter}`)
+			fetch(`${api_url}/boards/sort/${filter}`)
 				.then((res) => res.json())
 				.then((data) => setBoards(data))
 		} else {
-			fetch(`http://localhost:3000/boards/filter/${filter}`)
+			fetch(`${api_url}/boards/filter/${filter}`)
 				.then((res) => res.json())
 				.then((data) => setBoards(data))
 		}
