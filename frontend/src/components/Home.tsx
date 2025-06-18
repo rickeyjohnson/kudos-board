@@ -60,8 +60,8 @@ const Home: React.FC = () => {
 	}, [])
 
 	return (
-		<div className="Home">
-			<header>
+		<main className="Home">
+			<section>
 				<form className="search-form">
 					<input
 						className="search-bar"
@@ -109,7 +109,7 @@ const Home: React.FC = () => {
 				>
 					Create a New Board
 				</button>
-			</header>
+			</section>
 
 			<BoardsList boards={boards} deleteBoard={handleDeleteBoard} />
 
@@ -118,7 +118,7 @@ const Home: React.FC = () => {
 			) : (
 				<></>
 			)}
-		</div>
+		</main>
 	)
 }
 

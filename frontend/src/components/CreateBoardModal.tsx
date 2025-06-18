@@ -4,7 +4,6 @@ import type { CreateBoardModalProps } from '../types/board'
 const CreateBoardModal: FC<CreateBoardModalProps> = ({ onSubmit }) => {
 	const [title, setTitle] = useState<string>()
 	const [author, setAuthor] = useState<string>()
-	const [description, setDescription] = useState<string>()
 	const [category, setCategory] = useState<string>('Celebration')
 
 	const createNewBoard = (e: React.MouseEvent<HTMLButtonElement>) => {

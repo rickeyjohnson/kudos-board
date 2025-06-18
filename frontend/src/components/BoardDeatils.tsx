@@ -34,7 +34,7 @@ const BoardDetails: React.FC = () => {
 	}, [])
 
 	return (
-		<div className="board-details">
+		<main className="board-details">
 			<Link to="/">
 				<button>Back</button>
 			</Link>
@@ -52,7 +52,7 @@ const BoardDetails: React.FC = () => {
 			) : (
 				<></>
 			)}
-		</div>
+		</main>
 	)
 }
 
