@@ -1,5 +1,6 @@
 import type { FC } from 'react'
 import type { BoardProps } from '../types/board'
+import { Link } from 'react-router'
 
 const Board: FC<BoardProps> = ({ board, deleteBoard }) => {
 	const IMG_PLACEHOLDER =
@@ -22,7 +23,10 @@ const Board: FC<BoardProps> = ({ board, deleteBoard }) => {
 			<h4>{board.author}</h4>
 			<p>{board.category}</p>
 
-			<button className="view-board-btn">View Board</button>
+			<Link to={`/details/${board.id}`}>
+				<button className="view-board-btn">View Board</button>
+			</Link>
+
 			<button
 				className="delete-board-btn"
 				onClick={() => handleDeleteBoard()}

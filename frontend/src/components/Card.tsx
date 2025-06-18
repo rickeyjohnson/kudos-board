@@ -1,7 +1,7 @@
-import type { Card } from "../types/board"
+import type { CardType} from "../types/board"
 
 type CardProps = {
-    card: Card
+    card: CardType
 }
 
 const CardElement = ({ card }: CardProps) => {
