@@ -5,7 +5,7 @@ const CardsList: React.FC<CardsListProps> = ({ cards }) => {
 	return (
 		<div className="cards-list">
 			{cards.map((card) => {
-				return <Card card={card} />
+				return <Card key={card.id} card={card} />
 			})}
 		</div>
 	)

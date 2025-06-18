@@ -16,7 +16,8 @@ const Card = ({ card }: CardProps) => {
 				alt="board image"
 			/>
 			<h2>{card.title}</h2>
-			<p>{card.description}</p>
+			<p>{card.author}</p>
+            <p>upvotes: {card.upvotes}</p>
 		</div>
 	)
 }

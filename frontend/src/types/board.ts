@@ -2,7 +2,8 @@ type CardType = {
 	id: null | number
 	image_url: null | string
 	title: string
-	description: string
+	author: string
+	upvotes: number
 }
 
 type BoardType = {
