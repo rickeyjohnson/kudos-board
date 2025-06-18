@@ -1,17 +1,24 @@
-import type { CardType} from "../types/board"
+import type { CardType } from '../types/board'
 
 type CardProps = {
-    card: CardType
+	card: CardType
 }
 
-const CardElement = ({ card }: CardProps) => {
-    return (
-        <div className="card">
-            <img src={card.imageUrl ? card.imageUrl : 'https://picsum.photos/200/300'} alt="board image" />
+const Card = ({ card }: CardProps) => {
+	return (
+		<div className="card">
+			<img
+				src={
+					card.image_url
+						? card.image_url
+						: 'https://picsum.photos/200/300'
+				}
+				alt="board image"
+			/>
 			<h2>{card.title}</h2>
 			<p>{card.description}</p>
-        </div>
-    )
+		</div>
+	)
 }
 
-export default CardElement
+export default Card
