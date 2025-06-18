@@ -28,6 +28,10 @@ const BoardDetails: React.FC = () => {
 		setOpenCreateCardModal(false)
 	}
 
+	const handleDeleteBoard = () => {
+		
+	}
+
 	useEffect(() => {
 		fetchBoard()
 		fetchCards()
@@ -45,7 +49,7 @@ const BoardDetails: React.FC = () => {
 				Create new card
 			</button>
 
-			<CardsList cards={cards} />
+			<CardsList cards={cards} board_id={id ?? ''}/>
 
 			{openCreateCardModal ? (
 				<CreateCardModal onSubmit={handleSubmit} board_id={id ?? ''} />

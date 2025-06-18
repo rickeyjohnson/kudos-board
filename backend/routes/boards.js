@@ -115,12 +115,12 @@ router.post('/:id/cards', async (req, res) => {
 	res.json(newCard)
 })
 
-// router.delete('/:id/cards/:id', async (req, res) => {
-//     const { id } = req.params
-//     const deletedBoard = await prisma.boards.delete({
-//         where: { id: parseInt(id) }
-//     })
-//     res.json(deletedBoard)
-// })
+router.delete('/:board_id/cards/:id', async (req, res) => {
+    const { board_id, id } = req.params
+    const deleteCard = await prisma.cards.delete({
+        where: { id: parseInt(id) }
+    })
+    res.json(deleteCard)
+})
 
 module.exports = router

@@ -1,12 +1,24 @@
+import { useParams } from 'react-router'
 import type { CardType } from '../types/board'
 
 type CardProps = {
 	card: CardType
+	board_id: string
 }
 
-const Card = ({ card }: CardProps) => {
+const Card = ({ card, board_id }: CardProps) => {
 	const IMG_PLACEHOLDER =
 		'https://s3.eu-central-2.wasabisys.com/bub/wp-media-folder-british-university-of-bahrain-uk-bachelor-degree-courses/wp-content/uploads/2018/02/image-placeholder.jpg'
+
+	const handleDeleteBoard = () => {
+		fetch(`http://localhost:3000/boards/${board_id}/cards/${card.id}`, {
+			method: 'DELETE',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+		})
+		console.log('successs')
+	}
 
 	return (
 		<div className="card">
@@ -14,6 +26,10 @@ const Card = ({ card }: CardProps) => {
 			<h2>{card.title}</h2>
 			<p>{card.message}</p>
 			<p>upvotes: {card.upvotes}</p>
+
+			<p>{card.id}</p>
+
+			<button onClick={handleDeleteBoard}>Delete</button>
 		</div>
 	)
 }

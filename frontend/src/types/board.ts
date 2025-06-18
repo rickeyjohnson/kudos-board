@@ -27,6 +27,7 @@ type BoardsListProps = {
 
 type CardsListProps = {
 	cards: CardType[]
+	board_id: string
 }
 
 type HomeProps = {
