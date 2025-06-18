@@ -1,4 +1,3 @@
-import { useParams } from 'react-router'
 import type { CardType } from '../types/board'
 
 type CardProps = {
