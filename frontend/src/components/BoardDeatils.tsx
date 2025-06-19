@@ -37,12 +37,12 @@ const BoardDetails: React.FC = () => {
 	return (
 		<main className="board-details">
 			<Link to="/">
-				<button>Back</button>
+				<button className='back-btn'>Back</button>
 			</Link>
 
 			<h1>{board?.title}</h1>
 
-			<button onClick={() => setOpenCreateCardModal(true)}>
+			<button onClick={() => setOpenCreateCardModal(true)} className='create-new-card'>
 				Create new card
 			</button>
 

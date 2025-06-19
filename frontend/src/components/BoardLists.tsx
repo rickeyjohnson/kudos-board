@@ -4,7 +4,7 @@ import Board from './Board'
 
 const BoardsList: FC<BoardsListProps> = ({ boards, deleteBoard }) => {
 	return (
-		<div className="boards-list">
+		<div className="boards-list cards-list">
 			{boards.map((board) => {
 				return (
 					<Board

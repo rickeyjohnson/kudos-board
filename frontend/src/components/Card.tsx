@@ -21,15 +21,18 @@ const Card = ({ card, board_id }: CardProps) => {
 	}
 
 	return (
-		<div className="card">
-			<img src={IMG_PLACEHOLDER} alt="board image" />
+		<div className="card card-card">
 			<h2>{card.title}</h2>
 			<p>{card.message}</p>
+
+			<img src={IMG_PLACEHOLDER} alt="board image" />
+			
 			<p>upvotes: {card.upvotes}</p>
 
 			<p>{card.id}</p>
 
-			<button onClick={handleDeleteBoard}>Delete</button>
+			<button>Upvote</button>
+			<button onClick={handleDeleteBoard} className='delete-btn'>Delete</button>
 		</div>
 	)
 }

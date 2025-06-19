@@ -17,25 +17,28 @@ const Board: FC<BoardProps> = ({ board, deleteBoard }) => {
 	}
 
 	return (
-		<div className="board">
+		<div className="board card">
 			<img src={IMG_PLACEHOLDER} alt={board.title} />
 			<h3>{board.title}</h3>
+
 			<h4>{board.author}</h4>
 			<p>{board.category}</p>
 
-			<Link to={`/details/${board.id}`}>
-				<button className="view-board-btn">View Board</button>
-			</Link>
+			<div className='board-btns'>
+				<Link to={`/details/${board.id}`}>
+					<button className="view-board-btn">View</button>
+				</Link>
 
-			<button
-				className="delete-board-btn"
-				onClick={() => {
-					handleDeleteBoard()
-					deleteBoard()
-				}}
-			>
-				Delete Board
-			</button>
+				<button
+					className="delete-btn"
+					onClick={() => {
+						handleDeleteBoard()
+						deleteBoard()
+					}}
+				>
+					Delete
+				</button>
+			</div>
 		</div>
 	)
 }

@@ -1,0 +1,256 @@
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Geist', monospace;
+}
+
+.App {
+    display: flex;
+    flex-direction: column;
+}
+
+input,
+button,
+select {
+    border-radius: 0.6rem;
+    padding: 0.45rem 0.825rem;
+}
+
+input,
+select,
+.card {
+    border: 1px solid rgb(219, 219, 219);
+    border-radius: 0.45rem;
+
+    &:focus {
+        outline: none;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+        transition: box-shadow 0.2s ease-in;
+    }
+}
+
+header {
+    text-align: center;
+    padding: 1.75rem;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    margin-bottom: 1.75rem;
+
+    h1 {
+        font-weight: 650;
+        font-size: 3rem;
+    }
+}
+
+footer {
+    padding: 2rem;
+    text-align: center;
+    /* position: fixed;
+    bottom: 0;
+    left: 0; */
+    width: 100%;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    align-self: flex-end;
+}
+
+button {
+    border: none;
+
+    &:hover {
+        background-color: rgb(225, 225, 225);
+        cursor: pointer;
+    }
+
+    &:active {
+        background-color: rgb(200, 200, 200);
+    }
+}
+
+.search-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+
+    flex-wrap: wrap;
+
+    .search {
+        display: flex;
+        gap: 0.625rem;
+    }
+
+    select {
+        padding-right: 1rem;
+    }
+
+    input {
+        padding-right: 4rem;
+    }
+}
+
+.banner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.625rem;
+}
+
+.cards-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 15rem);
+    gap: 2rem;
+    margin: 1rem;
+}
+
+.card {
+    display: grid;
+    gap: 0.525rem;
+    grid-template-rows: auto 1.75rem 1.25rem 1.5rem auto;
+    justify-content: center;
+    height: 100%;
+    padding: 0.625rem;
+
+    img {
+        width: 100%;
+    }
+
+    h4 {
+        font-size: small;
+    }
+
+    .board-btns {
+        display: flex;
+        gap: 1rem;
+    }
+
+    .delete-btn {
+        color: rgb(255, 255, 255);
+        background-color: rgb(223, 0, 0);
+
+        &:hover {
+            background-color: rgb(223, 63, 63);
+        }
+    }
+
+    h2,
+    h3,
+    h4,
+    p {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}
+
+.modal-overlay {
+    background-color: rgba(0, 0, 0, 0.6);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: fixed;
+	z-index: 1;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	cursor: pointer;
+
+    .modal-content {
+        background-color: rgb(255, 255, 255);
+        border-radius: 0.625rem;
+        width: 37rem;
+        padding: 2.25rem;
+        position: relative;
+        cursor: default;
+        margin: 0;
+
+        .modal-form {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+
+            input,
+            select,
+            h1 {
+                margin: 0.25rem 0 1.5rem 0;
+            }
+
+            button {
+                width: 90%;
+                align-self: center;
+                color: rgb(255, 255, 255);
+                background-color: black;
+
+                &:hover {
+                    background-color: rgb(38, 38, 38);
+                }
+            }
+
+            h1 {
+                font-weight: 500;
+                font-size: 1.25rem;
+                margin-bottom: 0.425rem;
+            }
+
+            p {
+                margin-bottom: 1rem;
+                font-weight: 350;
+                color: rgb(123, 123, 123);
+            }
+
+            span {
+                color: rgb(223, 0, 0);
+            }
+        }
+    }
+
+    .exit-btn {
+        position: absolute;
+        z-index: 2;
+        right: 1.75rem;
+        top: 1.75rem;
+        padding: 0.15rem;
+        cursor: pointer;
+    }
+}
+
+.board-details {
+    display: flex;
+    flex-direction: column;
+
+    h1 {
+        text-align: center;
+        font-weight: 500;
+        font-size: 2rem;
+    }
+
+    .create-new-card {
+        align-self: center;
+        margin: 0.7rem 0;
+    }
+
+    .back-btn {
+        position: absolute;
+        top: 1rem;
+        left: 1rem;
+    }
+}
+
+.card-card {
+    img {
+        height: 100%;
+    }
+}
+
+.create-card-modal-content {
+    .message-text-box {
+        height: 4rem;
+    }
+
+    .exit-btn {
+        top: 1.25rem;
+        right: 1.25rem;
+    }
+}

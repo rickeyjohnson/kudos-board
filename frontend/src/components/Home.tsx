@@ -66,34 +66,36 @@ const Home: React.FC = () => {
 
 	return (
 		<main className="Home">
-			<section>
+			<section className='banner'>
 				<form className="search-form">
-					<input
-						className="search-bar"
-						type="text"
-						placeholder="Search boards"
-						name="search-bar"
-						value={searchQuery}
-						onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-							setSearchQuery(e.target.value)
-						}
-					/>
+					<div className='search'>
+						<input
+							className="search-bar"
+							type="text"
+							placeholder="Boards"
+							name="search-bar"
+							value={searchQuery}
+							onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+								setSearchQuery(e.target.value)
+							}
+						/>
 
-					<button
-						className="search-btn"
-						type="submit"
-						onClick={handleSearch}
-					>
-						Search
-					</button>
-
-					<button
-						className="clear-btn"
-						type="reset"
-						onClick={handleClear}
-					>
-						Clear
-					</button>
+						<button
+							className="search-btn"
+							type="submit"
+							onClick={handleSearch}
+						>
+							Search
+						</button>
+					
+						<button
+							className="clear-btn"
+							type="reset"
+							onClick={handleClear}
+						>
+							Clear
+						</button>
+					</div>
 
 					<select
 						className="filter-dropdown"
@@ -112,7 +114,7 @@ const Home: React.FC = () => {
 					className="create-board-btn"
 					onClick={() => setOpenCreateBoardModal(true)}
 				>
-					Create a New Board
+					Create Board
 				</button>
 			</section>
 
