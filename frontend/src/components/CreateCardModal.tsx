@@ -26,6 +26,7 @@ const CreateCardModal: FC<CreateCardModalProps> = ({ board_id, onSubmit}) => {
 					gif ?? 'https://s3.eu-central-2.wasabisys.com/bub/wp-media-folder-british-university-of-bahrain-uk-bachelor-degree-courses/wp-content/uploads/2018/02/image-placeholder.jpg',
 				author: author,
 				message: message,
+				pinned: false,
 			}),
 		})
 
@@ -39,7 +40,7 @@ const CreateCardModal: FC<CreateCardModalProps> = ({ board_id, onSubmit}) => {
 			.then(res => res.json())
 			.then((data) => {
 				
-				let gifs_urls: any[] = []
+				let gifs_urls: any = []
 
 				data.data.forEach((gif: any) => {
 					gifs_urls.push(gif.images.original.url)

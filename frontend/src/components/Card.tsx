@@ -8,9 +8,10 @@ type CardProps = {
 	board_id: string
 	deleteCard: any
 	upvoteCard: any
+	pinCard: any
 }
 
-const Card = ({ card, deleteCard, upvoteCard }: CardProps) => {
+const Card = ({ card, deleteCard, upvoteCard, pinCard }: CardProps) => {
 	const IMG_PLACEHOLDER =
 		'https://s3.eu-central-2.wasabisys.com/bub/wp-media-folder-british-university-of-bahrain-uk-bachelor-degree-courses/wp-content/uploads/2018/02/image-placeholder.jpg'
 	const [upvotes, setUpvotes] = useState(card.upvotes)
@@ -29,7 +30,16 @@ const Card = ({ card, deleteCard, upvoteCard }: CardProps) => {
 			<div className='card-btns'>
 				<button onClick={() => setOpenCardModal(true)}>View</button>
 				<button onClick={() => setOpenCommentModal(true)}>Comment</button>
-				<button>Pin</button>
+				<button 
+					onClick={() => pinCard(card.id, card.pinned)}
+					style={{
+						backgroundColor: card.pinned ? '#f5c518' : '#eee',
+						color: card.pinned ? '#000' : '#333',
+						transition: '0.3s'
+					}}
+				>
+						{card.pinned ? 'Pinned' : 'Pin'}
+				</button>
 				<button onClick={() => { 
 					upvoteCard(card.id, card.upvotes)
 					setUpvotes(upvotes + 1)

@@ -30,6 +30,7 @@ model Cards {
   image_url     String
   upvotes       Int
   message       String
+  pinned        Boolean
 }
 
 model Comments {

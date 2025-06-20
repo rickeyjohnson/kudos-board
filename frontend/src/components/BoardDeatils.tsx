@@ -9,6 +9,7 @@ const BoardDetails: React.FC = () => {
 	const [board, setBoard] = useState<BoardType>()
 	const [cards, setCards] = useState<CardType[]>([])
 	const [openCreateCardModal, setOpenCreateCardModal] = useState(false)
+	const [pinned, setIsPinned] = useState(false)
 	const api_url = import.meta.env.VITE_API_URL
 
 	const fetchBoard = async () => {
@@ -36,6 +37,8 @@ const BoardDetails: React.FC = () => {
 				'Content-Type': 'application/json',
 			},
 		})
+		fetchBoard()
+		fetchCards()
 	}
 
 	const handleUpvote = (card_id: any, upvotes: any) => {
@@ -48,6 +51,20 @@ const BoardDetails: React.FC = () => {
 				upvotes: upvotes,
 			})
 		})
+	}
+
+	const handlePin = (card_id: any, card_pinned: any) => {
+		fetch(`${api_url}/boards/${id}/cards/${card_id}/pinned`, {
+			method: 'PUT',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body : JSON.stringify({
+				pinned: !card_pinned,
+			})
+		})
+
+		fetchCards()
 	}
 
 	useEffect(() => {
@@ -67,7 +84,7 @@ const BoardDetails: React.FC = () => {
 				Create new card
 			</button>
 
-			<CardsList cards={cards} board_id={id ?? ''} deleteCard={handleDelete} upvoteCard={handleUpvote}/>
+			<CardsList cards={cards} board_id={id ?? ''} deleteCard={handleDelete} upvoteCard={handleUpvote} pinCard={handlePin}/>
 
 			{openCreateCardModal ? (
 				<CreateCardModal onSubmit={handleSubmit} board_id={id ?? ''} />

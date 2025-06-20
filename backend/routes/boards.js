@@ -94,13 +94,17 @@ router.get('/:id/cards', async (req, res) => {
 	const { id } = req.params
 	const cards = await prisma.cards.findMany({
 		where: { board_id: parseInt(id) },
+		orderBy: [
+			{pinned: 'desc'},
+			{id : 'asc'}
+		],
 	})
 	res.json(cards)
 })
 
 router.post('/:id/cards', async (req, res) => {
 	const { id } = req.params
-	const { title, image_url, author, message } = req.body
+	const { title, image_url, author, message, pinned } = req.body
 	const newCard = await prisma.cards.create({
 		data: {
 			board_id: parseInt(id),
@@ -108,7 +112,8 @@ router.post('/:id/cards', async (req, res) => {
 			image_url: image_url,
 			author: author,
 			upvotes: 0,
-            message: message
+            message: message,
+			pinned: pinned,
 		},
 	})
 
@@ -135,6 +140,30 @@ router.put('/:board_id/cards/:id', async (req, res) => {
 	})
 	res.json(updateCard)
 })
+
+// Card pinned
+router.put('/:board_id/cards/:id/pinned', async (req, res) => {
+	const { board_id, id } = req.params
+	const { pinned } = req.body
+	const updateCard = await prisma.cards.update({
+		where: { id: parseInt(id) },
+		data: {
+			pinned: Boolean(pinned),
+		}
+	})
+	res.json(updateCard)
+})
+
+// router.get('/:board_id/cards/:id/pinned', async (req, res) => {
+// 	const { board_id, id } = req.params
+// 	const updateCard = await prisma.cards.findMany({
+// 		where: { id: parseInt(id) },
+// 		orderBy: {
+// 			pinned: 'desc'
+// 		}
+// 	})
+// 	res.json(updateCard)
+// })
 
 // Comments
 router.get('/:board_id/cards/:card_id/comments', async (req, res) => {

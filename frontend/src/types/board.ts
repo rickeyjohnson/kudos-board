@@ -5,6 +5,7 @@ type CardType = {
 	author: string
 	upvotes: number
 	message: string
+	pinned: boolean
 }
 
 type BoardType = {
@@ -30,6 +31,7 @@ type CardsListProps = {
 	board_id: string
 	deleteCard: any
 	upvoteCard: any
+	pinCard: any
 }
 
 type HomeProps = {
