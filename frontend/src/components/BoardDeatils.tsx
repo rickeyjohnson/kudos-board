@@ -11,14 +11,14 @@ const BoardDetails: React.FC = () => {
 	const [openCreateCardModal, setOpenCreateCardModal] = useState(false)
 	const api_url = import.meta.env.VITE_API_URL
 
-	const fetchBoard = () => {
-		fetch(`${api_url}/boards/${id}`)
+	const fetchBoard = async () => {
+		await fetch(`${api_url}/boards/${id}`)
 			.then((res) => res.json())
 			.then((data) => setBoard(data))
 	}
 
-	const fetchCards = () => {
-		fetch(`${api_url}/boards/${id}/cards`)
+	const fetchCards = async () => {
+		await fetch(`${api_url}/boards/${id}/cards`)
 			.then((res) => res.json())
 			.then((data) => setCards(data))
 	}
@@ -27,6 +27,27 @@ const BoardDetails: React.FC = () => {
 		fetchBoard()
 		fetchCards()
 		setOpenCreateCardModal(false)
+	}
+
+	const handleDelete = (card_id: any) => {
+		fetch(`${api_url}/boards/${id}/cards/${card_id}`, {
+			method: 'DELETE',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+		})
+	}
+
+	const handleUpvote = (card_id: any, upvotes: any) => {
+		fetch(`${api_url}/boards/${id}/cards/${card_id}`, {
+			method: 'PUT',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body : JSON.stringify({
+				upvotes: upvotes,
+			})
+		})
 	}
 
 	useEffect(() => {
@@ -46,7 +67,7 @@ const BoardDetails: React.FC = () => {
 				Create new card
 			</button>
 
-			<CardsList cards={cards} board_id={id ?? ''}/>
+			<CardsList cards={cards} board_id={id ?? ''} deleteCard={handleDelete} upvoteCard={handleUpvote}/>
 
 			{openCreateCardModal ? (
 				<CreateCardModal onSubmit={handleSubmit} board_id={id ?? ''} />

@@ -123,4 +123,17 @@ router.delete('/:board_id/cards/:id', async (req, res) => {
     res.json(deleteCard)
 })
 
+// Card upvotes
+router.put('/:board_id/cards/:id', async (req, res) => {
+	const { board_id, id } = req.params
+	const { upvotes } = req.body
+	const updateCard = await prisma.cards.update({
+		where: { id: parseInt(id) },
+		data: {
+			upvotes: parseInt(upvotes) + 1,
+		}
+	})
+	res.json(updateCard)
+})
+
 module.exports = router

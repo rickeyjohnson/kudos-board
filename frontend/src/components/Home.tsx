@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import BoardsList from './BoardLists'
 import CreateBoardModal from './CreateBoardModal'
 import type { BoardType } from '../types/board'
@@ -9,10 +9,11 @@ const Home: React.FC = () => {
 	const [filterOption, setFilterOption] = useState<string>('')
 	const [openCreateBoardModal, setOpenCreateBoardModal] =
 		useState<boolean>(false)
+	const hasRunFirst = useRef(false);
 	const api_url = import.meta.env.VITE_API_URL
 
-	const fetchBoards = () => {
-		fetch(`${api_url}/boards`)
+	const fetchBoards = async () => {
+		await fetch(`${api_url}/boards`)
 			.then((res) => res.json())
 			.then((data) => setBoards(data))
 	}
@@ -35,8 +36,8 @@ const Home: React.FC = () => {
 		fetchBoards()
 	}
 
-	const handleSumbit = () => {
-		fetchBoards()
+	const handleSumbit = async () => {
+
 		setOpenCreateBoardModal(false)
 	}
 
@@ -56,13 +57,47 @@ const Home: React.FC = () => {
 		setFilterOption(filter)
 	}
 
-	const handleDeleteBoard = () => {
-		console.log('board deleted')
+	// const handleDeleteBoard = () => {
+	// 	console.log('board deleted')
+	// 	fetchBoards()
+	// }
+
+	const handleDelete = async (board_id: number) => {
+		await fetch(`${api_url}/boards/${board_id}`, {
+			method: 'DELETE',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+		})
+
+		await fetchBoards()
+	}
+
+	const handleCreate = async (e: Event, title: string, author: string, category: string) => {
+		if (!title) { return }
+
+		await fetch(`${api_url}/boards`, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+				title: title,
+				author: author,
+				category: category,
+				image_url:
+					'https://s3.eu-central-2.wasabisys.com/bub/wp-media-folder-british-university-of-bahrain-uk-bachelor-degree-courses/wp-content/uploads/2018/02/image-placeholder.jpg',
+			}),
+		})
+
+		e.preventDefault()
+		setOpenCreateBoardModal(false)
+		fetchBoards()
 	}
 
 	useEffect(() => {
 		fetchBoards()
-	}, [boards])
+	}, [])
 
 	return (
 		<main className="Home">
@@ -118,10 +153,10 @@ const Home: React.FC = () => {
 				</button>
 			</section>
 
-			<BoardsList boards={boards} deleteBoard={handleDeleteBoard} />
+			<BoardsList boards={boards} deleteBoard={handleDelete} />
 
 			{openCreateBoardModal ? (
-				<CreateBoardModal onSubmit={handleSumbit} />
+				<CreateBoardModal onSubmit={handleCreate} closeModal={() => setOpenCreateBoardModal(false)} />
 			) : (
 				<></>
 			)}

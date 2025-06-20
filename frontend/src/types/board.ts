@@ -17,17 +17,19 @@ type BoardType = {
 
 type BoardProps = {
 	board: BoardType
-	deleteBoard: () => void
+	deleteBoard: (board_id: number) => void
 }
 
 type BoardsListProps = {
 	boards: BoardType[]
-	deleteBoard: () => void
+	deleteBoard: (board_id: number) => void
 }
 
 type CardsListProps = {
 	cards: CardType[]
 	board_id: string
+	deleteCard: any
+	upvoteCard: any
 }
 
 type HomeProps = {
@@ -41,7 +43,8 @@ type BoardDetailsProps = {
 }
 
 type CreateBoardModalProps = {
-	onSubmit: () => void
+	onSubmit: any
+	closeModal: any
 }
 
 type CreateCardModalProps = {

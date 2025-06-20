@@ -1,44 +1,49 @@
 import { useState, type ChangeEvent, type FC } from 'react'
 import type { CreateBoardModalProps } from '../types/board'
 
-const CreateBoardModal: FC<CreateBoardModalProps> = ({ onSubmit }) => {
+const CreateBoardModal: FC<CreateBoardModalProps> = ({ onSubmit, closeModal }) => {
 	const [title, setTitle] = useState<string>('')
 	const [author, setAuthor] = useState<string>('')
 	const [category, setCategory] = useState<string>('Celebration')
 	const api_url = import.meta.env.VITE_API_URL
 
-	const createNewBoard = (e: React.MouseEvent<HTMLButtonElement>) => {
-		if (!title) { return false }
+	// const createNewBoard = (e: Event) => {
+	// 	if (!title) { return false }
 
-		fetch(`${api_url}/boards`, {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify({
-				title: title,
-				author: author,
-				category: category,
-				image_url:
-					'https://s3.eu-central-2.wasabisys.com/bub/wp-media-folder-british-university-of-bahrain-uk-bachelor-degree-courses/wp-content/uploads/2018/02/image-placeholder.jpg',
-			}),
-		})
+	// 	fetch(`${api_url}/boards`, {
+	// 		method: 'POST',
+	// 		headers: {
+	// 			'Content-Type': 'application/json',
+	// 		},
+	// 		body: JSON.stringify({
+	// 			title: title,
+	// 			author: author,
+	// 			category: category,
+	// 			image_url:
+	// 				'https://s3.eu-central-2.wasabisys.com/bub/wp-media-folder-british-university-of-bahrain-uk-bachelor-degree-courses/wp-content/uploads/2018/02/image-placeholder.jpg',
+	// 		}),
+	// 	})
 
+	// 	e.preventDefault()
+	// 	return true
+	// }
+
+	// const handleExit = (e: React.MouseEvent<HTMLDivElement>) => {
+	// 	const targetElement = e.target as HTMLDivElement
+	// 	if (targetElement.classList.contains('exit')) {
+	// 		onSubmit()
+	// 	}
+	// }
+
+	const handleSubmit = (e: any) => {
 		e.preventDefault()
-		return true
-	}
-
-	const handleExit = (e: React.MouseEvent<HTMLDivElement>) => {
-		const targetElement = e.target as HTMLDivElement
-		if (targetElement.classList.contains('exit')) {
-			onSubmit()
-		}
+		onSubmit(e, title, author, category)
 	}
 
 	return (
-		<div onClick={(e) => handleExit(e)} className="create-board-modal-overlay modal-overlay exit">
-			<div className='className="create-board-modal-content modal-content'>
-				<div className='exit-btn exit' onClick={(e) => handleExit(e)}><svg className='exit' xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path className='exit' d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg></div>
+		<div onClick={closeModal} className="create-board-modal-overlay modal-overlay exit">
+			<div className='className="create-board-modal-content modal-content' onClick={(e) => e.stopPropagation()}>
+				<div className='exit-btn exit' onClick={closeModal}><svg className='exit' xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path className='exit' d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg></div>
 				<form className='modal-form'>
 					<h1>Create Board</h1>
 					<p>Enter information about your board to create a new board. Click create when you're done.</p>
@@ -82,9 +87,7 @@ const CreateBoardModal: FC<CreateBoardModalProps> = ({ onSubmit }) => {
 
 					<button
 						type="submit"
-						onClick={(e) => {
-							if (createNewBoard(e)) { onSubmit() }
-						}}
+						onClick={(e) => handleSubmit(e)}
 					>
 						Create
 					</button>
