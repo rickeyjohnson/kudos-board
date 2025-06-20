@@ -104,7 +104,7 @@ const CreateCardModal: FC<CreateCardModalProps> = ({ board_id, onSubmit}) => {
 						<div className='gifs'>
 							{
 								gifs.map((gif, index) => {
-									return <img onClick={() => setGif(gif)} key={index} src={gif} />
+									return <img className='gif' onClick={() => setGif(gif)} key={index} src={gif} />
 								})
 							}
 						</div>

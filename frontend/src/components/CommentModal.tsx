@@ -1,5 +1,4 @@
 import { useState } from "react"
-import type { CardType } from "../types/board"
 import { useParams } from "react-router"
 
 export const CommentModal = ({ closeModal, card_id } : {

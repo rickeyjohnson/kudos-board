@@ -10,7 +10,7 @@ type CardProps = {
 	upvoteCard: any
 }
 
-const Card = ({ card, board_id, deleteCard, upvoteCard }: CardProps) => {
+const Card = ({ card, deleteCard, upvoteCard }: CardProps) => {
 	const IMG_PLACEHOLDER =
 		'https://s3.eu-central-2.wasabisys.com/bub/wp-media-folder-british-university-of-bahrain-uk-bachelor-degree-courses/wp-content/uploads/2018/02/image-placeholder.jpg'
 	const [upvotes, setUpvotes] = useState(card.upvotes)
