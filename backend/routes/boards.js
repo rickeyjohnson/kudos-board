@@ -136,4 +136,39 @@ router.put('/:board_id/cards/:id', async (req, res) => {
 	res.json(updateCard)
 })
 
+// Comments
+router.get('/:board_id/cards/:card_id/comments', async (req, res) => {
+	const { board_id, card_id } = req.params
+	const comments = await prisma.comments.findMany({
+		where: { card_id: parseInt(card_id) },
+	})
+	res.json(comments)
+})
+
+router.post('/:board_id/cards/:card_id/comments', async (req, res) => {
+	const { board_id, card_id } = req.params
+	const { author, comments } = req.body
+	const newComments = await prisma.comments.create({
+		data: {
+			card_id: parseInt(card_id),
+			author: author,
+			comments: comments,
+		},
+	})
+
+	res.json(newComments)
+})
+
+// router.put('/:board_id/cards/:card_id', async (req, res) => {
+// 	const { board_id, card_id } = req.params
+// 	const { comment } = req.body
+// 	const updateComments = await prisma.comments.findMany({
+// 		where: { card_id: parseInt(card_id) },
+// 		data: {
+// 			comment: comment,
+// 		}
+// 	})
+// 	res.json(updateComments)
+// })
+
 module.exports = router

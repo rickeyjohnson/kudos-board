@@ -16,13 +16,15 @@
 
 input,
 button,
-select {
+select,
+textarea {
     border-radius: 0.6rem;
     padding: 0.45rem 0.825rem;
 }
 
 input,
 select,
+textarea,
 .card {
     border: 1px solid rgb(219, 219, 219);
     border-radius: 0.45rem;
@@ -195,10 +197,6 @@ button {
                 color: rgb(123, 123, 123);
             }
 
-            span {
-                color: rgb(223, 0, 0);
-            }
-
             .giphy-search {
                 display: flex;
                 flex-direction: column;
@@ -254,6 +252,7 @@ button {
         .card-btns {
             display: flex;
             gap: 1rem;
+            flex-wrap: wrap;
         }
     }
 }
@@ -287,4 +286,74 @@ button {
     img {
         width: 6rem;
     }
+}
+
+.comment-content {
+    input {
+        margin: 0.225rem 0 1.1rem 0;
+    }
+
+    p {
+        margin-bottom: 0.655rem;
+        color:rgb(53, 53, 53);
+    }
+
+    .comment-box {
+        min-width: 100%;
+        max-width: 100%;
+        padding: 1rem;
+    }
+
+    .comment-author-input {
+        width: 100%;
+    }
+
+    h2 {
+        font-weight: 500;
+    }
+
+    button {
+        background-color: black;
+        color: white;
+        
+        &:hover {
+            background-color: rgb(54, 54, 54);
+        }
+    }
+}
+
+.modal-content.card-modal-content {
+    display: flex;
+    flex-direction: column;
+    height: 80%;
+    width: 80%;
+    flex-wrap: wrap;
+    text-align: center;
+    gap: 0.45rem;
+
+    h5 {
+        font-size: medium;
+        font-weight: 400;
+    }
+
+    .comments {
+        height: 100%;
+        overflow: scroll;
+    }
+
+    .comment {
+        overflow: scroll;
+        background-color: rgb(229, 229, 229);
+        border-radius: 0.7rem;
+        padding: 0.5rem;
+        margin: 1rem 0;
+
+        .comment-author {
+            font-weight: 600;
+        }
+    }
+}
+
+span {
+    color: rgb(223, 0, 0);
 }
