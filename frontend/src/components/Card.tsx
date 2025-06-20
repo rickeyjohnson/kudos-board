@@ -24,31 +24,56 @@ const Card = ({ card, deleteCard, upvoteCard, pinCard }: CardProps) => {
 			<p>{card.message}</p>
 
 			<img src={card.image_url ?? IMG_PLACEHOLDER} alt="board image" />
-			
+
 			<p>upvotes: {card.upvotes}</p>
 
-			<div className='card-btns'>
+			<div className="card-btns">
 				<button onClick={() => setOpenCardModal(true)}>View</button>
-				<button onClick={() => setOpenCommentModal(true)}>Comment</button>
-				<button 
+				<button onClick={() => setOpenCommentModal(true)}>
+					Comment
+				</button>
+				<button
 					onClick={() => pinCard(card.id, card.pinned)}
 					style={{
 						backgroundColor: card.pinned ? '#f5c518' : '#eee',
 						color: card.pinned ? '#000' : '#333',
-						transition: '0.3s'
+						transition: '0.3s',
 					}}
 				>
-						{card.pinned ? 'Pinned' : 'Pin'}
+					{card.pinned ? 'Pinned' : 'Pin'}
 				</button>
-				<button onClick={() => { 
-					upvoteCard(card.id, card.upvotes)
-					setUpvotes(upvotes + 1)
-				}}>Upvote</button>
-				<button onClick={() => deleteCard(card.id)} className='delete-btn'>Delete</button>
+				<button
+					onClick={() => {
+						upvoteCard(card.id, card.upvotes)
+						setUpvotes(upvotes + 1)
+					}}
+				>
+					Upvote
+				</button>
+				<button
+					onClick={() => deleteCard(card.id)}
+					className="delete-btn"
+				>
+					Delete
+				</button>
 			</div>
 
-			{ openCardModal ? <CardModal card={card} closeModal={() => setOpenCardModal(false)}/> : <></>}
-			{ openCommentModal ? <CommentModal closeModal={() => setOpenCommentModal(false)} card_id={card.id ?? 0} /> : <></>} 
+			{openCardModal ? (
+				<CardModal
+					card={card}
+					closeModal={() => setOpenCardModal(false)}
+				/>
+			) : (
+				<></>
+			)}
+			{openCommentModal ? (
+				<CommentModal
+					closeModal={() => setOpenCommentModal(false)}
+					card_id={card.id ?? 0}
+				/>
+			) : (
+				<></>
+			)}
 		</div>
 	)
 }

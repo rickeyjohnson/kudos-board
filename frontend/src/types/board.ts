@@ -63,5 +63,5 @@ export {
 	type BoardDetailsProps,
 	type CardType,
 	type CreateBoardModalProps,
-	type CreateCardModalProps
+	type CreateCardModalProps,
 }

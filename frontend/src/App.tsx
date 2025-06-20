@@ -20,7 +20,12 @@ const App = () => {
 
 	return (
 		<div className="App">
-			<button className='dark-light-toggle' onClick={() => setDarkMode(!darkMode)}>Toggle {darkMode ? 'Light' : 'Dark'}</button>
+			<button
+				className="dark-light-toggle"
+				onClick={() => setDarkMode(!darkMode)}
+			>
+				Toggle {darkMode ? 'Light' : 'Dark'}
+			</button>
 			<Header />
 			<Routes>
 				<Route path="/" element={<Home />} />

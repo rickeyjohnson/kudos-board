@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import BoardsList from './BoardLists'
 import CreateBoardModal from './CreateBoardModal'
 import type { BoardType } from '../types/board'
@@ -9,7 +9,6 @@ const Home: React.FC = () => {
 	const [filterOption, setFilterOption] = useState<string>('')
 	const [openCreateBoardModal, setOpenCreateBoardModal] =
 		useState<boolean>(false)
-	const hasRunFirst = useRef(false);
 	const api_url = import.meta.env.VITE_API_URL
 
 	const fetchBoards = async () => {
@@ -21,8 +20,8 @@ const Home: React.FC = () => {
 	const handleSearch = (event: React.MouseEvent<HTMLButtonElement>) => {
 		event.preventDefault()
 
-		if (!searchQuery) { 
-			fetchBoards() 
+		if (!searchQuery) {
+			fetchBoards()
 		} else {
 			fetch(`${api_url}/boards/search/${searchQuery}`)
 				.then((res) => res.json())
@@ -34,11 +33,6 @@ const Home: React.FC = () => {
 		event.preventDefault()
 		setSearchQuery('')
 		fetchBoards()
-	}
-
-	const handleSumbit = async () => {
-
-		setOpenCreateBoardModal(false)
 	}
 
 	const handleSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -57,11 +51,6 @@ const Home: React.FC = () => {
 		setFilterOption(filter)
 	}
 
-	// const handleDeleteBoard = () => {
-	// 	console.log('board deleted')
-	// 	fetchBoards()
-	// }
-
 	const handleDelete = async (board_id: number) => {
 		await fetch(`${api_url}/boards/${board_id}`, {
 			method: 'DELETE',
@@ -73,8 +62,15 @@ const Home: React.FC = () => {
 		await fetchBoards()
 	}
 
-	const handleCreate = async (e: Event, title: string, author: string, category: string) => {
-		if (!title) { return }
+	const handleCreate = async (
+		e: Event,
+		title: string,
+		author: string,
+		category: string
+	) => {
+		if (!title) {
+			return
+		}
 
 		await fetch(`${api_url}/boards`, {
 			method: 'POST',
@@ -101,18 +97,18 @@ const Home: React.FC = () => {
 
 	return (
 		<main className="Home">
-			<section className='banner'>
+			<section className="banner">
 				<form className="search-form">
-					<div className='search'>
+					<div className="search">
 						<input
 							className="search-bar"
 							type="text"
 							placeholder="Boards"
 							name="search-bar"
 							value={searchQuery}
-							onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-								setSearchQuery(e.target.value)
-							}
+							onChange={(
+								e: React.ChangeEvent<HTMLInputElement>
+							) => setSearchQuery(e.target.value)}
 						/>
 
 						<button
@@ -122,7 +118,7 @@ const Home: React.FC = () => {
 						>
 							Search
 						</button>
-					
+
 						<button
 							className="clear-btn"
 							type="reset"
@@ -156,7 +152,10 @@ const Home: React.FC = () => {
 			<BoardsList boards={boards} deleteBoard={handleDelete} />
 
 			{openCreateBoardModal ? (
-				<CreateBoardModal onSubmit={handleCreate} closeModal={() => setOpenCreateBoardModal(false)} />
+				<CreateBoardModal
+					onSubmit={handleCreate}
+					closeModal={() => setOpenCreateBoardModal(false)}
+				/>
 			) : (
 				<></>
 			)}
