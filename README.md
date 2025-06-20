@@ -1,12 +1,10 @@
 # kudos-board
 
-📝 `NOTE` Use this template to initialize the contents of a README.md file for your application. As you work on your assignment over the course of the week, update the required or stretch features lists to indicate which features you have completed by changing `[ ]` to `[x]`. (🚫 Remove this paragraph before submitting your assignment.)
-
 ## Unit Assignment: Kudos Board
 
 Submitted by: **Rickey Johnson**
 
-Deployed Application (**required**): [Kudos Board Deployed Site](https://kudosboard-12up.onrender.com)
+Deployed Application: [Kudos Board Deployed Site](https://kudosboard-12up.onrender.com)
 
 ### Application Features
 
@@ -139,9 +137,14 @@ Deployed Application (**required**): [Kudos Board Deployed Site](https://kudosbo
 
 ### Walkthrough Video
 
-`TODO://` Add the embedded URL code to your animated app walkthrough below, `ADD_EMBEDDED_CODE_HERE`. Make sure the video or gif actually renders and animates when viewing this README. Ensure your walkthrough showcases the presence and/or functionality of all features you implemented above (check them off as you film!). Pay attention to any **VIDEO WALKTHROUGH SPECIAL INSTRUCTIONS** checkboxes listed above to ensure graders see the full functionality of your website! (🚫 Remove this paragraph after adding walkthrough video)
-
-<div style="position: relative; padding-bottom: 47.8125%; height: 0;"><iframe src="https://www.loom.com/embed/7e807e73cbea451aa9a9e09ae7da2de7?sid=c0992097-cd23-4824-8d92-c3c2e7a5db3b" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe></div>
+<div>
+    <a href="https://www.loom.com/share/7e807e73cbea451aa9a9e09ae7da2de7">
+      <p>Kudos-Board Video</p>
+    </a>
+    <a href="https://www.loom.com/share/7e807e73cbea451aa9a9e09ae7da2de7">
+      <img style="max-width:300px;" src="https://cdn.loom.com/sessions/thumbnails/7e807e73cbea451aa9a9e09ae7da2de7-016d5db7fbf3c817-full-play.gif">
+    </a>
+</div>
 
 ### Reflection
 
